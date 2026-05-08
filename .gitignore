@@ -1,0 +1,36 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Log files
+file_sort_log.txt
+
+# Virtual environment
+venv/
+.env/
+
+# OS-specific junk
+.DS_Store
+Thumbs.db
+
+# IDE/project settings
+.vscode/
+.idea/
+
+# Test and coverage reports
+.coverage
+htmlcov/
+*.cover
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Jupyter notebooks checkpoints (if you ever use notebooks)
+.ipynb_checkpoints/
+
+# Python environment managers
+.poetry/
+pip-wheel-metadata/
