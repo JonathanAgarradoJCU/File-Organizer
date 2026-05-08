@@ -8,6 +8,8 @@ def sort_files_by_extension(directory, log_file="file_sort_log.txt"):
         print(f"Directory '{directory}' does not exist.")
         return
     
+    moved_any = False  # Track if any files were moved
+    
     for filename in os.listdir(directory):
         file_path = os.path.join(directory, filename)
 
@@ -31,6 +33,7 @@ def sort_files_by_extension(directory, log_file="file_sort_log.txt"):
         # Only move if not already in the right place
         if file_path != dest_path:
             shutil.move(file_path, dest_path)
+            moved_any = True
             print(f"Moved: {filename} → {folder_path}")
 
             # Log the move with timestamp
@@ -39,6 +42,10 @@ def sort_files_by_extension(directory, log_file="file_sort_log.txt"):
                 log.write(f"[{timestamp}] Moved '{filename}' to '{extension if extension else 'NO_EXTENSION'}'\n")
         else:
             print(f"Skipped (already sorted): {filename}")
+
+    # Final message if nothing was moved
+    if not moved_any:
+        print("No files moved — everything is already sorted.")
 
 # Automatically detect the current user's Downloads folder
 downloads_folder = Path.home() / "Downloads"
