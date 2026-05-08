@@ -13,8 +13,8 @@ def sort_files_by_extension(directory, log_file="file_sort_log.txt"):
     for filename in os.listdir(directory):
         file_path = os.path.join(directory, filename)
 
-        # Skip directories (including extension folders already created)
-        if os.path.isdir(file_path):
+        # Skip directories and the log file itself
+        if os.path.isdir(file_path) or filename == log_file:
             continue
 
         # Get file extension (uppercase, no dot)
@@ -36,7 +36,7 @@ def sort_files_by_extension(directory, log_file="file_sort_log.txt"):
             moved_any = True
             print(f"Moved: {filename} → {folder_path}")
 
-            # Log the move with timestamp
+            # Log the move with timestamp (append mode)
             with open(os.path.join(directory, log_file), "a", encoding="utf-8") as log:
                 timestamp = datetime.now().strftime("%d/%m/%Y %H:%M")
                 log.write(f"[{timestamp}] Moved '{filename}' to '{extension if extension else 'NO_EXTENSION'}'\n")
@@ -45,7 +45,7 @@ def sort_files_by_extension(directory, log_file="file_sort_log.txt"):
 
     # Final message if nothing was moved
     if not moved_any:
-        print("No files moved — everything is already sorted.")
+        print("No files needed to be moved — everything is already sorted.")
 
 # Automatically detect the current user's Downloads folder
 downloads_folder = Path.home() / "Downloads"
