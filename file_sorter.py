@@ -1,5 +1,6 @@
 import os
 import shutil
+from pathlib import Path
 
 def sort_files_by_extension(directory):
     # Ensure the directory exists
@@ -33,6 +34,6 @@ def sort_files_by_extension(directory):
             shutil.move(file_path, os.path.join(no_ext_folder, filename))
             print(f"Moved: {filename} → {no_ext_folder}")
 
-# Example usage:
-target_directory = r"C:\Users\YourName\Downloads"  # Change this to your folder path
-sort_files_by_extension(target_directory)
+# Automatically detect the current user's Downloads folder
+downloads_folder = Path.home() / "Downloads"
+sort_files_by_extension(str(downloads_folder))
